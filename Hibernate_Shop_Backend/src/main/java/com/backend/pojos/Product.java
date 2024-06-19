@@ -22,13 +22,13 @@ public class Product {
 	@Column(name = "ProductID")
 	private int productID;
 	
-	@Column(name = "ProductCode")
+	@Column(name = "ProductCode" , nullable = false)
 	private String productCode;
 	
-	@Column(name = "Name")
+	@Column(name = "Name" , nullable = false)
 	private String name;
 	
-	@Column(name = "Price")
+	@Column(name = "Price" , nullable = false)
 	private double price;
 	
 	@Column(name = "Description")
@@ -54,7 +54,7 @@ public class Product {
 	@Column(name = "ShellAmount")
 	private double shellAmount;
 	
-	@Column(name = "Status")
+	@Column(name = "Status" , nullable = false)
 	private boolean status;
 	
 	// foreign key

@@ -22,13 +22,13 @@ public class ShellMaterial {
 	@Column(name = "ShellID")
 	private int shellID;
 	
-	@Column(name = "Name")
+	@Column(name = "Name" , nullable = false)
 	private String name;
 	
-	@Column(name = "Amount")
+	@Column(name = "Amount" , nullable = false)
 	private double amount;
 	
-	@Column(name = "Status")
+	@Column(name = "Status" , nullable = false)
 	private boolean status;
 
 	// foreign key mapped

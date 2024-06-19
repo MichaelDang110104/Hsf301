@@ -10,8 +10,17 @@
 		<property name="connection.username">sa</property>
 		<property name="connection.password">12345</property>
 		<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-		<mapping class="com.backend.Diamond" />
-
+		<mapping class="com.backend.pojos.Diamond" />
+		<mapping class="com.backend.pojos.Category" />
+		<mapping class="com.backend.pojos.Customer" />
+		<mapping class="com.backend.pojos.Employee" />
+		<mapping class="com.backend.pojos.OrderDetail" />
+		<mapping class="com.backend.pojos.Product" />
+		<mapping class="com.backend.pojos.Promotion" />
+		<mapping class="com.backend.pojos.PurchaseOrder" />
+		<mapping class="com.backend.pojos.ShellMaterial" />
+		<mapping class="com.backend.pojos.Size" />
+		<mapping class="com.backend.pojos.Warranty" />
 	</session-factory>
 
 

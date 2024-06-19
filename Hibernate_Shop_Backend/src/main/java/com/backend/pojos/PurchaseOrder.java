@@ -24,16 +24,29 @@ public class PurchaseOrder {
 	@Column(name = "OrderID")
 	private int oderID;
 	// foreign key
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "UserID")
+	@OneToOne(cascade = CascadeType.ALL )
+	@JoinColumn(name = "UserID" , nullable = false)
 	private Customer userID;
-
+	
+	@Column(name = "CreateDate", nullable = false)
 	private Date createDate;
+	
+	@Column(name = "PaymentMethod", nullable = false)
 	private String paymentMethod;
+	
+	@Column(name = "Name", nullable = false)
 	private String name;
+	
+	@Column(name = "PhoneNumber", nullable = false)
 	private String phoneNumber;
+	
+	@Column(name = "ShippingAddress", nullable = false)
 	private String shippingAddress;
+	
+	@Column(name = "TotalPrice", nullable = false)
 	private double totalPrice;
+	
+	@Column(name = "OrderStatus", nullable = false)
 	private String orderStatus;
 	// foreign key
 	@ManyToOne(cascade = CascadeType.ALL)

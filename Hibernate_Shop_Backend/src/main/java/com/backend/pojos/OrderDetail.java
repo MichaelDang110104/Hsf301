@@ -28,7 +28,7 @@ public class OrderDetail {
 	@JoinColumn(name = "OrderID")
 	private PurchaseOrder orderID;
 
-	@Column(name = "LineTotal")
+	@Column(name = "LineTotal" , nullable = false)
 	private double lineTotal;
 
 	// foreign key 
@@ -49,8 +49,14 @@ public class OrderDetail {
 	//foreign key mapped
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "OrderDetailID")
-	Warranty warrantyList = new Warranty();
+	Warranty warranty = new Warranty();
 	
+	@Column(name = "Size")
+	private double size;
+	
+	@Column(name = "Status" , nullable = false)
+	private boolean status;
+
 	public PurchaseOrder getOrderID() {
 		return orderID;
 	}
@@ -59,20 +65,15 @@ public class OrderDetail {
 		this.orderID = orderID;
 	}
 
-	public Warranty getWarrantyList() {
-		return warrantyList;
+	public Warranty getWarranty() {
+		return warranty;
 	}
 
-	public void setWarrantyList(Warranty warrantyList) {
-		this.warrantyList = warrantyList;
+	public void setWarranty(Warranty warranty) {
+		this.warranty = warranty;
 	}
 
-	@Column(name = "Size")
-	private double size;
 	
-	@Column(name = "Status")
-	private boolean status;
-
 	public OrderDetail() {
 		this.orderDetailID = 0;
 		this.lineTotal = 0.00;
@@ -108,7 +109,7 @@ public class OrderDetail {
 	public String toString() {
 		return "OrderDetail [orderDetailID=" + orderDetailID + ", orderID=" + orderID + ", lineTotal=" + lineTotal
 				+ ", productID=" + productID + ", shellMaterialID=" + shellMaterialID + ", subDiamondID=" + subDiamondID
-				+ ", warrantyList=" + warrantyList + ", size=" + size + ", status=" + status + "]";
+				+ ", warrantyList=" + warranty + ", size=" + size + ", status=" + status + "]";
 	}
 
 	public double getLineTotal() {
