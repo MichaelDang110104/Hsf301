@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.backend.pojos.Size;
 
@@ -19,26 +20,29 @@ import com.backend.pojos.Size;
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CATEGORYID")
+	@Column(name = "CategoryID")
 	private int categoryID;
 	
-	@Column(name = "NAME")
+	@Column(name = "Name" , nullable = false)
 	private String name;
 	
-	@Column (name = "STATUS")
+	@Column (name = "Status" , nullable = false)
 	private boolean status;
 	
 	//foreign key mapped
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn (name = "CategoryID")
-	Set<Size> sizeList = new HashSet<Size>();
 	Set<Product> productList = new HashSet<Product>();
 	
-	public Set<Size> getSizeList() {
-		return sizeList;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CategoryID")
+	Size size = new Size();
+	
+	public Size getSize() {
+		return size;
 	}
-	public void setSizeList(Set<Size> sizeList) {
-		this.sizeList = sizeList;
+	public void setSize(Size size) {
+		this.size = size;
 	}
 	public Set<Product> getProductList() {
 		return productList;
@@ -77,7 +81,8 @@ public class Category {
 	}
 	@Override
 	public String toString() {
-		return "Category [categoryID=" + categoryID + ", name=" + name + ", status=" + status + "]";
+		return "Category [categoryID=" + categoryID + ", name=" + name + ", status=" + status + ", productList="
+				+ productList + ", size=" + size + "]";
 	}
 	
 }

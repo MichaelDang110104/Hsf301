@@ -21,21 +21,29 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CustomerID")
 	private int customerID;
-	@Column(name = "Email")
+	
+	@Column(name = "Email", nullable = false, unique = true)
 	private String email;
-	@Column(name = "Password")
+	
+	@Column(name = "Password", nullable = false)
 	private String password;
-	@Column(name = "Last_Name")
+	
+	@Column(name = "Last_Name", nullable = false)
 	private String lastName;
-	@Column(name = "First_Name")
+	
+	@Column(name = "First_Name", nullable = false)
 	private String firstName;
+	
 	@Column(name = "Address")
 	private String address;
+	
 	@Column(name = "PhoneNumber")
 	private String phoneNumber;
+	
 	@Column(name = "Points")
 	private Long points;
-	@Column(name = "Status")
+	
+	@Column(name = "Status" , nullable = false)
 	private boolean status;
 
 	// foreign key mapped

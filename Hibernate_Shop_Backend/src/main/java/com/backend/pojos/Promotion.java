@@ -26,22 +26,22 @@ public class Promotion {
 	@Column(name = "Name")
 	private String name;
 	
-	@Column(name = "Percentage")
+	@Column(name = "Percentage" , nullable = false)
 	private double percentage;
 	
-	@Column(name = "Valid_From")
+	@Column(name = "Valid_From" , nullable = false)
 	private Date validFrom;
 	
 	@Column(name = "Valid_To")
 	private Date validTo;
 	
-	@Column(name = "Description")
+	@Column(name = "Description" , nullable = false)
 	private String description;
 	
-	@Column(name = "Code")
+	@Column(name = "Code" , nullable = false)
 	private String code;
 	
-	@Column(name = "Status")
+	@Column(name = "Status", nullable = false)
 	private boolean status;
 	
 	//foreign key mapped

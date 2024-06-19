@@ -35,13 +35,13 @@ public class Warranty {
 	@JoinColumn(name = "OrderDetailID")
 	private OrderDetail orderDetailID;
 
-	@Column(name = "StartDate")
+	@Column(name = "StartDate" , nullable = false)
 	private Date startDate;
 
-	@Column(name = "EndDate")
+	@Column(name = "EndDate" , nullable = false)
 	private Date endDate;
 
-	@Column(name = "Status")
+	@Column(name = "Status" , nullable = false)
 	private boolean status;
 
 	public Warranty() {

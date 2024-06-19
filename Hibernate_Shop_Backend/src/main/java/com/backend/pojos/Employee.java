@@ -21,19 +21,19 @@ public class Employee {
 	@Column(name = "EmployeeID")
 	private int employeeID;
 	
-	@Column(name = "Role")
+	@Column(name = "Role", nullable = false)
 	private String role;
 	
-	@Column(name = "Email")
+	@Column(name = "Email", nullable = false)
 	private String email;
 	
-	@Column(name = "Password")
+	@Column(name = "Password", nullable = false)
 	private String password;
 	
-	@Column(name = "Last_Name")
+	@Column(name = "Last_Name", nullable = false)
 	private String lastName;
 	
-	@Column(name = "First_Name")
+	@Column(name = "First_Name", nullable = false)
 	private String firstName;
 	
 	@Column(name = "Address")
@@ -42,7 +42,7 @@ public class Employee {
 	@Column(name = "PhoneNumber")
 	private String phoneNumber;
 	
-	@Column(name = "Status")
+	@Column(name = "Status" , nullable = false)
 	private boolean status;
 	
 	// foreign key mapped

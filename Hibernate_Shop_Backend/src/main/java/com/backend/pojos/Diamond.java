@@ -39,10 +39,10 @@ public class Diamond {
 	@Column(name = "Certificate_Scan")
 	private String certificateScan;
 	
-	@Column(name = "Amount_Available")
+	@Column(name = "Amount_Available" , nullable = false)
 	private int amountAvailable;
 	
-	@Column(name = "Status")
+	@Column(name = "Status" , nullable = false)
 	private boolean status;
 	
 	// foreign key mapped
