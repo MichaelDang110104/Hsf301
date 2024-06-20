@@ -25,7 +25,7 @@ public class EmployeeDAO {
 		try {
 			session.save(employee);
 			transaction.commit();
-			System.out.println("Successfully saved");
+			System.out.println("Save employee successfully !");
 		} catch (Exception e) {
 			transaction.rollback();
 			System.err.println("Error: " + e.getMessage());
@@ -41,9 +41,11 @@ public class EmployeeDAO {
 		try {
 			transaction.begin();
 			Employee employee = (Employee) session.get(Employee.class, id);
-			session.delete(employee);
+			if(employee!=null) {
+				employee.setStatus(false);
+			}
 			transaction.commit();
-			
+			System.out.println("Delete employee successfully !");
 		} catch (Exception e) {
 			transaction.rollback();
 			throw e;
@@ -59,7 +61,7 @@ public class EmployeeDAO {
 		try {
 			session.update(employee);
 			transaction.commit();
-			System.out.println("Update succesfully");
+			System.out.println("Update employee succesfully !");
 		} catch (Exception e) {
 			transaction.rollback();
 			System.err.println("Error: " + e.getMessage());
@@ -68,13 +70,12 @@ public class EmployeeDAO {
 		}
 	}
 	
-	public List<Employee> getAllProduct() {
+	public List<Employee> getAll() {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
 			t.begin();
-			List<Employee> list = session.createQuery("SELECT *  FROM [dbo].[EMPLOYEE]", Employee.class).list();
-			t.commit();
+			List<Employee> list = session.createQuery("SELECT e  FROM Employee e", Employee.class).list();
 			return list;
 		} catch (Exception e) {
 			t.rollback();
@@ -87,10 +88,13 @@ public class EmployeeDAO {
 	
 	public Employee findById(int id) {
 		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
 		try {
 			return (Employee) session.get(Employee.class, id);
 		} catch (Exception e) {
-			throw e;
+			System.out.println("Error: "+e.getMessage());
+			t.rollback();
+			return null;
 		} finally {
 			session.close();
 		}

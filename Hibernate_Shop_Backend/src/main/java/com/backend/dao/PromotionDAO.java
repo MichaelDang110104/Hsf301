@@ -7,26 +7,25 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.backend.pojos.Diamond;
+import com.backend.pojos.Promotion;
 
-
-public class DiamondDAO {
+public class PromotionDAO {
 	private SessionFactory sessionFactory = null;
 	private Configuration cf = null;
-	
-	public DiamondDAO(String persitanceName) {
+
+	public PromotionDAO(String configurationFile) {
 		cf = new Configuration();
-		cf = cf.configure(persitanceName);
+		cf = cf.configure(configurationFile);
 		sessionFactory = cf.buildSessionFactory();
 	}
-	
-	public void save(Diamond diamond) {
+
+	public void save(Promotion promotion) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			session.save(diamond);
+			session.save(promotion);
 			transaction.commit();
-			System.out.println("Save diamond successfully !");
+			System.out.println("Save promotion successfully !");
 		} catch (Exception e) {
 			transaction.rollback();
 			System.err.println("Error: " + e.getMessage());
@@ -35,33 +34,33 @@ public class DiamondDAO {
 			session.close();
 		}
 	}
-	
-	public void delete(int id) {
-	    Session session = sessionFactory.openSession();
-	    Transaction transaction = session.beginTransaction();
-	    try {
-	        Diamond diamond = (Diamond) session.get(Diamond.class, id);
-	        if (diamond != null) {
-	            diamond.setStatus(false);
-	        }
-	        transaction.commit();
-	        System.out.println("Delete diamond successfully !");
-	    } catch (Exception e) {
-	        transaction.rollback();
-	        throw e;
-	    } finally {
-	        session.close();
-	    }
-	}
 
-	
-	public void update(Diamond diamond) {
+	public void delete(int id) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			session.update(diamond);
+			transaction.begin();
+			Promotion promotion = (Promotion) session.get(Promotion.class, id);
+			if (promotion != null) {
+				promotion.setStatus(false);
+			}
 			transaction.commit();
-			System.out.println("Update diamond succesfully");
+			System.out.println("Delete promotion successfully !");
+		} catch (Exception e) {
+			transaction.rollback();
+			System.out.println("Error: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+	}
+
+	public void update(Promotion promotion) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			session.update(promotion);
+			transaction.commit();
+			System.out.println("Update promotion succesfully !");
 		} catch (Exception e) {
 			transaction.rollback();
 			System.err.println("Error: " + e.getMessage());
@@ -69,13 +68,14 @@ public class DiamondDAO {
 			session.close();
 		}
 	}
-	
-	public List<Diamond> getAll() {
+
+	public List<Promotion> getAllProduct() {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			t.begin();
-			List<Diamond> list = session.createQuery("SELECT d from Diamond d", Diamond.class).list();
+			List<Promotion> list = session.createQuery("SELECT promotion FROM Promotion promotion", Promotion.class)
+					.list();
+			t.commit();
 			return list;
 		} catch (Exception e) {
 			t.rollback();
@@ -85,18 +85,19 @@ public class DiamondDAO {
 		}
 		return null;
 	}
-	
-	public Diamond findById(int id) {
+
+	public Promotion findById(int id) {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			return (Diamond) session.get(Diamond.class, id);
+			return (Promotion) session.get(Promotion.class, id);
 		} catch (Exception e) {
-			System.out.println("Error: "+e.getMessage());
 			t.rollback();
+			System.out.println("Error: " + e.getMessage());
 			return null;
 		} finally {
 			session.close();
 		}
 	}
+
 }

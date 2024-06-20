@@ -7,26 +7,26 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.backend.pojos.Diamond;
+import com.backend.pojos.Promotion;
+import com.backend.pojos.Warranty;
 
-
-public class DiamondDAO {
+public class WarrantyDAO {
 	private SessionFactory sessionFactory = null;
 	private Configuration cf = null;
-	
-	public DiamondDAO(String persitanceName) {
+
+	public WarrantyDAO(String configurationFile) {
 		cf = new Configuration();
-		cf = cf.configure(persitanceName);
+		cf = cf.configure(configurationFile);
 		sessionFactory = cf.buildSessionFactory();
 	}
-	
-	public void save(Diamond diamond) {
+
+	public void save(Warranty warranty) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			session.save(diamond);
+			session.save(warranty);
 			transaction.commit();
-			System.out.println("Save diamond successfully !");
+			System.out.println("Save warranty successfully !");
 		} catch (Exception e) {
 			transaction.rollback();
 			System.err.println("Error: " + e.getMessage());
@@ -35,33 +35,33 @@ public class DiamondDAO {
 			session.close();
 		}
 	}
-	
-	public void delete(int id) {
-	    Session session = sessionFactory.openSession();
-	    Transaction transaction = session.beginTransaction();
-	    try {
-	        Diamond diamond = (Diamond) session.get(Diamond.class, id);
-	        if (diamond != null) {
-	            diamond.setStatus(false);
-	        }
-	        transaction.commit();
-	        System.out.println("Delete diamond successfully !");
-	    } catch (Exception e) {
-	        transaction.rollback();
-	        throw e;
-	    } finally {
-	        session.close();
-	    }
-	}
 
-	
-	public void update(Diamond diamond) {
+	public void delete(int id) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			session.update(diamond);
+			transaction.begin();
+			Warranty warranty = (Warranty) session.get(Warranty.class, id);
+			if (warranty != null) {
+				warranty.setStatus(false);
+			}
 			transaction.commit();
-			System.out.println("Update diamond succesfully");
+			System.out.println("Delete warranty successfully !");
+		} catch (Exception e) {
+			transaction.rollback();
+			System.out.println("Error: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+	}
+
+	public void update(Warranty warranty) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			session.update(warranty);
+			transaction.commit();
+			System.out.println("Update warranty succesfully !");
 		} catch (Exception e) {
 			transaction.rollback();
 			System.err.println("Error: " + e.getMessage());
@@ -69,13 +69,12 @@ public class DiamondDAO {
 			session.close();
 		}
 	}
-	
-	public List<Diamond> getAll() {
+
+	public List<Warranty> getAll() {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			t.begin();
-			List<Diamond> list = session.createQuery("SELECT d from Diamond d", Diamond.class).list();
+			List<Warranty> list = session.createQuery("SELECT warranty FROM Warranty warranty", Warranty.class).list();
 			return list;
 		} catch (Exception e) {
 			t.rollback();
@@ -85,18 +84,19 @@ public class DiamondDAO {
 		}
 		return null;
 	}
-	
-	public Diamond findById(int id) {
+
+	public Warranty findById(int id) {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			return (Diamond) session.get(Diamond.class, id);
+			return (Warranty) session.get(Warranty.class, id);
 		} catch (Exception e) {
-			System.out.println("Error: "+e.getMessage());
 			t.rollback();
+			System.out.println("Error: " + e.getMessage());
 			return null;
 		} finally {
 			session.close();
 		}
 	}
+
 }

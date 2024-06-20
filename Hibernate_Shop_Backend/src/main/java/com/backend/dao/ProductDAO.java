@@ -26,7 +26,7 @@ public class ProductDAO {
 		try {
 			session.save(product);
 			transaction.commit();
-			System.out.println("Successfully saved");
+			System.out.println("Save product successfully !");
 		} catch (Exception e) {
 			transaction.rollback();
 			System.err.println("Error: " + e.getMessage());
@@ -44,7 +44,6 @@ public class ProductDAO {
 	        Product product = (Product) session.get(Product.class, id);
 	        if (product != null) {
 	            product.setStatus(false); 
-	            session.update(product);
 	        }
 	        transaction.commit();
 	    } catch (Exception e) {
@@ -62,7 +61,7 @@ public class ProductDAO {
 		try {
 			session.update(product);
 			transaction.commit();
-			System.out.println("Update succesfully");
+			System.out.println("Update product succesfully !");
 		} catch (Exception e) {
 			transaction.rollback();
 			System.err.println("Error: " + e.getMessage());
@@ -71,12 +70,11 @@ public class ProductDAO {
 		}
 	}
 	
-	public List<Product> getAllProduct() {
+	public List<Product> getAll() {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			t.begin();
-			List<Product> list = session.createQuery("SELECT *FROM [dbo].[PRODUCT]", Product.class).list();
+			List<Product> list = session.createQuery("SELECT p FROM Product p", Product.class).list();
 			t.commit();
 			return list;
 		} catch (Exception e) {
@@ -90,10 +88,13 @@ public class ProductDAO {
 	
 	public Product findById(int id) {
 		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
 		try {
 			return (Product) session.get(Product.class, id);
 		} catch (Exception e) {
-			throw e;
+			t.rollback();
+			System.out.println("Error: "+e.getMessage());
+			return null;
 		} finally {
 			session.close();
 		}

@@ -25,7 +25,7 @@ public class PurchaseOrderDAO {
 		try {
 			session.save(detail);
 			transaction.commit();
-			System.out.println("Successfully saved");
+			System.out.println("Save purchase order successfully !");
 		} catch (Exception e) {
 			transaction.rollback();
 			System.err.println("Error: " + e.getMessage());
@@ -43,10 +43,10 @@ public class PurchaseOrderDAO {
 			PurchaseOrder purchaseOrder = (PurchaseOrder) session.get(PurchaseOrder.class, id);
 			session.delete(purchaseOrder);
 			transaction.commit();
-			
+			System.out.println("Delete purchase order successfully !");
 		} catch (Exception e) {
 			transaction.rollback();
-			throw e;
+			System.out.println("Error: "+e.getMessage());
 		} finally {
 			sessionFactory.close();
 			session.close();
@@ -59,7 +59,7 @@ public class PurchaseOrderDAO {
 		try {
 			session.update(purchaseOrder);
 			transaction.commit();
-			System.out.println("Update succesfully");
+			System.out.println("Update purchase order  succesfully");
 		} catch (Exception e) {
 			transaction.rollback();
 			System.err.println("Error: " + e.getMessage());
@@ -68,13 +68,12 @@ public class PurchaseOrderDAO {
 		}
 	}
 	
-	public List<PurchaseOrder> getAllProduct() {
+	public List<PurchaseOrder> getAllPurchaseOrder() {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
 			t.begin();
-			List<PurchaseOrder> list = session.createQuery("SELECT *  FROM [dbo].[PURCHASEORDER]", PurchaseOrder.class).list();
-			t.commit();
+			List<PurchaseOrder> list = session.createQuery("SELECT po FROM PurchaseOrder po", PurchaseOrder.class).list();
 			return list;
 		} catch (Exception e) {
 			t.rollback();
@@ -87,10 +86,13 @@ public class PurchaseOrderDAO {
 	
 	public PurchaseOrder findById(int id) {
 		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
 		try {
 			return (PurchaseOrder) session.get(PurchaseOrder.class, id);
 		} catch (Exception e) {
-			throw e;
+			System.out.println("Error: "+e.getMessage());
+			t.rollback();
+			return null;
 		} finally {
 			session.close();
 		}
