@@ -68,7 +68,7 @@ public class PurchaseOrderDAO {
 		}
 	}
 	
-	public List<PurchaseOrder> getAllPurchaseOrder() {
+	public List<PurchaseOrder> getAll() {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {

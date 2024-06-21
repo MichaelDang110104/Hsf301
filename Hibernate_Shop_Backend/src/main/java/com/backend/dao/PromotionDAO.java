@@ -69,7 +69,7 @@ public class PromotionDAO {
 		}
 	}
 
-	public List<Promotion> getAllProduct() {
+	public List<Promotion> getAll() {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
