@@ -7,7 +7,7 @@ import com.backend.pojos.ShellMaterial;
 
 public class ShellMaterialRepository implements IShellMaterialRepository{
 
-	ShellMaterialDAO shellDAO = null;
+	private ShellMaterialDAO shellDAO = null;
 	public ShellMaterialRepository(String configurationFile) {
 		if(shellDAO == null) {
 			shellDAO = new ShellMaterialDAO(configurationFile);

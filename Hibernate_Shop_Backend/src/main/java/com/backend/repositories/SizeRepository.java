@@ -5,15 +5,16 @@ import java.util.List;
 import com.backend.dao.SizeDAO;
 import com.backend.pojos.Size;
 
-public class SizeRepository implements ISizeRepository{
+public class SizeRepository implements ISizeRepository {
 
-		SizeDAO sizeDAO = null;
-		public SizeRepository(String configurationFile) {
-			if(sizeDAO == null) {
-				sizeDAO = new SizeDAO(configurationFile);
-			}
+	private SizeDAO sizeDAO = null;
+
+	public SizeRepository(String configurationFile) {
+		if (sizeDAO == null) {
+			sizeDAO = new SizeDAO(configurationFile);
 		}
-	
+	}
+
 	@Override
 	public void save(Size size) {
 		// TODO Auto-generated method stub

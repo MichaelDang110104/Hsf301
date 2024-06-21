@@ -6,7 +6,7 @@ import com.backend.dao.EmployeeDAO;
 import com.backend.pojos.Employee;
 
 public class EmployeeRepository implements IEmployeeRepository {
-	EmployeeDAO empDAO = null;
+	private EmployeeDAO empDAO = null;
 
 	public EmployeeRepository(String configurationFile) {
 		if (empDAO == null) {

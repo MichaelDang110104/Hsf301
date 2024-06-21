@@ -6,7 +6,7 @@ import com.backend.dao.PurchaseOrderDAO;
 import com.backend.pojos.PurchaseOrder;
 
 public class PurchaseOrderRepository implements IPurchaseOrderRepository{
-	PurchaseOrderDAO purchaseOrderDAO = null;
+	private PurchaseOrderDAO purchaseOrderDAO = null;
 	public PurchaseOrderRepository(String configuratioFile) {
 		if(purchaseOrderDAO == null) {
 			purchaseOrderDAO = new PurchaseOrderDAO(configuratioFile);

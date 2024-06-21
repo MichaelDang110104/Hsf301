@@ -6,7 +6,7 @@ import com.backend.dao.ProductDAO;
 import com.backend.pojos.Product;
 
 public class ProductRepository implements IProductRepository{
-	ProductDAO proDAO = null;
+	private ProductDAO proDAO = null;
 	public ProductRepository(String configurationFile) {
 		if(proDAO == null) {
 			proDAO = new ProductDAO(configurationFile);

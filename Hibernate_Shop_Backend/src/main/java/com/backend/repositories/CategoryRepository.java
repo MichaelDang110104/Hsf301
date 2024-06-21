@@ -6,7 +6,7 @@ import com.backend.dao.CategoryDAO;
 import com.backend.pojos.Category;
 
 public class CategoryRepository implements ICategoryRepository{
-	CategoryDAO catDAO = null;
+	private CategoryDAO catDAO = null;
 	public CategoryRepository(String configurationFile) {
 		if(catDAO == null) {
 			catDAO = new CategoryDAO(configurationFile);

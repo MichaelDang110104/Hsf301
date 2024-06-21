@@ -1,45 +1,46 @@
-package com.backend.repositories;
+package com.backend.services;
 
 import java.util.List;
 
-import com.backend.dao.DiamondDAO;
 import com.backend.pojos.Diamond;
+import com.backend.repositories.DiamondRepository;
+import com.backend.repositories.IDiamondRepository;
 
-public class DiamondRepository implements IDiamondRepository{
-	private DiamondDAO diaDAO = null;
-	public DiamondRepository(String configurationFile) {
-		if(diaDAO == null) {
-			diaDAO = new DiamondDAO(configurationFile);
+public class DiamondService implements IDiamondService{
+	private IDiamondRepository iDiaRepo = null;
+	public DiamondService(String configurationFile) {
+		if(iDiaRepo == null) {
+			iDiaRepo = new DiamondRepository(configurationFile);
 		}
 	}
 	@Override
 	public void save(Diamond diamond) {
 		// TODO Auto-generated method stub
-		diaDAO.save(diamond);
+		iDiaRepo.save(diamond);
 	}
 
 	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
-		diaDAO.delete(id);
+		iDiaRepo.delete(id);
 	}
 
 	@Override
 	public void update(Diamond diamond) {
 		// TODO Auto-generated method stub
-		diaDAO.update(diamond);
+		iDiaRepo.update(diamond);
 	}
 
 	@Override
 	public List<Diamond> getAll() {
 		// TODO Auto-generated method stub
-		return diaDAO.getAll();
+		return iDiaRepo.getAll();
 	}
 
 	@Override
 	public Diamond findById(int id) {
 		// TODO Auto-generated method stub
-		return diaDAO.findById(id);
+		return iDiaRepo.findById(id);
 	}
 
 }

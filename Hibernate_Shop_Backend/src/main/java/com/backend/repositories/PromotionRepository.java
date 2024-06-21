@@ -6,7 +6,7 @@ import com.backend.dao.PromotionDAO;
 import com.backend.pojos.Promotion;
 
 public class PromotionRepository implements IPromotionRepository{
-	PromotionDAO promotionDAO = null;
+	private PromotionDAO promotionDAO = null;
 	public PromotionRepository(String configurationFile) {
 		if(promotionDAO == null) {
 			promotionDAO = new PromotionDAO(configurationFile);

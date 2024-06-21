@@ -6,7 +6,7 @@ import com.backend.dao.CustomerDAO;
 import com.backend.pojos.Customer;
 
 public class CustomerRepository implements ICustomerRepository{
-	CustomerDAO cusDAO = null;
+	private CustomerDAO cusDAO = null;
 	
 	public CustomerRepository(String configurationFile) {
 		if(cusDAO == null) {

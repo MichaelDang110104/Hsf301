@@ -6,7 +6,7 @@ import com.backend.dao.OrderDetailDAO;
 import com.backend.pojos.OrderDetail;
 
 public class OrderDetailRepository implements IOrderDetailRepository {
-	OrderDetailDAO orderDetailDAO = null;
+	private OrderDetailDAO orderDetailDAO = null;
 
 	public OrderDetailRepository(String configurationFile) {
 		if (orderDetailDAO == null) {

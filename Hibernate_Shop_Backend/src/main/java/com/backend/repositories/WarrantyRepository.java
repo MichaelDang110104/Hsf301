@@ -7,7 +7,7 @@ import com.backend.pojos.Warranty;
 
 public class WarrantyRepository implements IWarrantyRepository {
 
-	WarrantyDAO warrDAO = null;
+	private WarrantyDAO warrDAO = null;
 
 	public WarrantyRepository(String configurationFile) {
 		if (warrDAO == null) {
