@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+	<session-factory>
+		<property name="hbm2ddl.auto">update</property>
+		<property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+		<property name="connection.url">jdbc:sqlserver://localhost:1433;DatabaseName=
+			Hibernate_Shop;encrypt=true;trustServerCertificate=true</property>
+		<property name="connection.username">sa</property>
+		<property name="connection.password">12345</property>
+		<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		<mapping class="com.backend.pojos.Diamond" />
+		<mapping class="com.backend.pojos.Category" />
+		<mapping class="com.backend.pojos.Customer" />
+		<mapping class="com.backend.pojos.Employee" />
+		<mapping class="com.backend.pojos.OrderDetail" />
+		<mapping class="com.backend.pojos.Product" />
+		<mapping class="com.backend.pojos.Promotion" />
+		<mapping class="com.backend.pojos.PurchaseOrder" />
+		<mapping class="com.backend.pojos.ShellMaterial" />
+		<mapping class="com.backend.pojos.Size" />
+		<mapping class="com.backend.pojos.Warranty" />
+	</session-factory>
+
+
+
+</hibernate-configuration>  

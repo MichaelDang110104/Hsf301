@@ -1,3 +1,5 @@
+create database Hibernate_Shop
+use Hibernate_Shop
 -- User table
 CREATE TABLE CUSTOMER (
     CustomerID INT PRIMARY KEY IDENTITY(1,1),
