@@ -1991,26 +1991,31 @@
                                                     <div class="shop-hover d-flex justify-content-center">
                                                         <ul>
                                                             <li>
-                                                                <a th:href="@{${product.addToWishlistUrl}}"  
-                                                                   class="bg-white w-40px h-40px text-dark-gray d-flex align-items-center justify-content-center rounded-circle ms-5px me-5px box-shadow-large"
-                                                                   data-bs-toggle="tooltip" data-bs-placement="left" 
-                                                                   th:title="${product.addToWishlistTooltip}">
-                                                                   <i class="feather icon-feather-heart fs-16"></i></a>
+                                                                <a th:href="@{${product.addToWishlistUrl}}"
+                                                                    class="bg-white w-40px h-40px text-dark-gray d-flex align-items-center justify-content-center rounded-circle ms-5px me-5px box-shadow-large"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="left"
+                                                                    th:title="${product.addToWishlistTooltip}">
+                                                                    <i class="feather icon-feather-heart fs-16"></i></a>
                                                             </li>
                                                             <li>
-                                                                <a th:href="@{${product.quickViewUrl}}"  
-                                                                   class="bg-white w-40px h-40px text-dark-gray d-flex align-items-center justify-content-center rounded-circle ms-5px me-5px box-shadow-large"
-                                                                   data-bs-toggle="tooltip" data-bs-placement="left" 
-                                                                   th:title="${product.quickViewTooltip}">
-                                                                   <i class="feather icon-feather-eye fs-16"></i></a>
+                                                                <a th:href="@{${product.quickViewUrl}}"
+                                                                    class="bg-white w-40px h-40px text-dark-gray d-flex align-items-center justify-content-center rounded-circle ms-5px me-5px box-shadow-large"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="left"
+                                                                    th:title="${product.quickViewTooltip}">
+                                                                    <i class="feather icon-feather-eye fs-16"></i></a>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <div class="shop-footer text-center">
-                                                    <a href="demo-jewellery-store-single-product.html"
-                                                        class="text-dark-gray fs-19 fw-500">Diamond earrings</a>
-                                                    <div class="price"><del>$200.00</del>$189.00</div>
+                                                    <a th:href="@{${product.url}}" class="text-dark-gray fs-19 fw-500"
+                                                        th:text="${product.name}">Diamond earrings</a>
+                                                    <div class="price">
+                                                        <del th:if="${product.oldPrice != null}"
+                                                            th:text="${#numbers.formatDecimal(product.oldPrice, 1, 2)}">$200.00</del>
+                                                        <span
+                                                            th:text="${#numbers.formatDecimal(product.price, 1, 2)}">$189.00</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
